@@ -1,13 +1,17 @@
 package org.sid.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Contact implements Serializable {
 
+    @Id @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     private String email;
     private long tel;
