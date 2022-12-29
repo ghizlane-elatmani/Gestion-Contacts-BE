@@ -3,6 +3,8 @@ package org.sid.web;
 import org.sid.dao.ContactRepository;
 import org.sid.entities.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,14 @@ public class ContactRestService {
     @RequestMapping(value = "/contacts/{id}", method = RequestMethod.GET)
     public Optional<Contact> getContact(@PathVariable Long id){
         return contactRepository.findById(id);
+    }
+
+    @RequestMapping(value = "/searchContacts", method = RequestMethod.GET)
+    public Page<Contact> search(
+            @RequestParam(name = "kw", defaultValue = "") String kw,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size){
+        return contactRepository.search("%" + kw + "%", PageRequest.of(page, size));
     }
 
     @RequestMapping(value = "/contacts", method = RequestMethod.POST)
