@@ -25,6 +25,8 @@ public class GestionContactsApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		contactRepository.save(new Contact("Hassani", "Mohamed", df.parse("12/10/1998"), "hassani@gmail.com", 0645, "hassan.jpeg"));
+		contactRepository.save(new Contact("Achraf", "Hakimi", df.parse("10/08/1998"), "achraf@gmail.com", 0645, "achraf.jpeg"));
+		contactRepository.save(new Contact("Kawtar", "Lairaichi", df.parse("25/02/1998"), "kawtar@gmail.com", 0645, "kawtar.jpeg"));
 		contactRepository.findAll().forEach(c -> {
 			System.out.println(c.getFirstName());
 		});
